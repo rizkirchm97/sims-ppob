@@ -54,3 +54,21 @@ class RegistrationRoute extends GoRouteData {
                 child: child),
       );
 }
+
+@TypedGoRoute<MainRoute>(path: '/')
+class MainRoute extends GoRouteData {
+  const MainRoute({this.fromPage});
+
+  final String? fromPage;
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) =>
+      CustomTransitionPage(
+        key: state.pageKey,
+        child: const HomePage(),
+        transitionsBuilder: (context, animation, animation2, child) =>
+            SlideTransition(
+                position: PageTransitionType.slideBottomToTop(animation),
+                child: child),
+      );
+}

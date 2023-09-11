@@ -137,7 +137,9 @@ class _LoginPageState extends State<LoginPage> {
                         SizedBox(
                           width: double.infinity,
                           child: FilledButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              context.go('/');
+                            },
                             style: ButtonStyle(
                                 backgroundColor: MaterialStatePropertyAll(
                                     Constants.primaryRed)),

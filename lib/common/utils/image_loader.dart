@@ -11,4 +11,8 @@ class ImageLoader {
         height: height,
         width: width,
       );
+
+  static assetImage(String name) =>
+      AssetImage("assets/images/$name");
+
 }

@@ -10,6 +10,7 @@ List<RouteBase> get $appRoutes => [
       $splashRoute,
       $loginRoute,
       $registrationRoute,
+      $mainRoute,
     ];
 
 RouteBase get $splashRoute => GoRouteData.$route(
@@ -78,6 +79,33 @@ extension $RegistrationRouteExtension on RegistrationRoute {
 
   String get location => GoRouteData.$location(
         '/registration',
+        queryParams: {
+          if (fromPage != null) 'from-page': fromPage,
+        },
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $mainRoute => GoRouteData.$route(
+      path: '/',
+      factory: $MainRouteExtension._fromState,
+    );
+
+extension $MainRouteExtension on MainRoute {
+  static MainRoute _fromState(GoRouterState state) => MainRoute(
+        fromPage: state.uri.queryParameters['from-page'],
+      );
+
+  String get location => GoRouteData.$location(
+        '/',
         queryParams: {
           if (fromPage != null) 'from-page': fromPage,
         },
